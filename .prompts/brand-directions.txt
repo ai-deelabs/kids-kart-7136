@@ -1,0 +1,5 @@
+DIRECTION 1: full-bleed diagonal split hero with staggered card grid — chunky rounded sans-serif headlines + mechanical monospace for stats — asphalt charcoal + neon lemon yellow + flame orange accents — loud, kinetic, playground-meets-racetrack
+
+DIRECTION 2: horizontal scroll track-lane layout with checkered section dividers — tall condensed italic display font + bubbly lowercase body copy — electric sky blue + chalk white + bubblegum coral — breezy, sun-drenched, Saturday-afternoon fun
+
+DIRECTION 3: comic-panel grid with bold ink borders and speed-line backgrounds — hand-drawn blocky headline lettering + clean rounded UI font — deep grape purple + vivid mint + cream paper texture — playful-dramatic, Saturday-morning-cartoon energy

@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kid's Kart — โกคาร์ตสำหรับเด็ก</title>
+<meta name="description" content="Kid's Kart สนามโกคาร์ตที่สนุกที่สุดสำหรับเด็กอายุ 5–16 ปี ปลอดภัย ตื่นเต้น น่าจดจำ">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,700;1,800;1,900&family=Nunito:wght@400;500;600;700;800&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@0.460.0"></script>
+<style>
+:root {
+  --sky: #18CFFF;
+  --sky-dark: #00A8D9;
+  --sky-pale: #E0F9FF;
+  --coral: #FF5577;
+  --coral-dark: #E03558;
+  --chalk: #F8F5EE;
+  --dark: #161422;
+  --mid: #2B2840;
+  --gold: #FFD700;
+  --track: #1A1730;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Nunito', 'IBM Plex Sans Thai', sans-serif;
+  background: var(--chalk);
+  color: var(--dark);
+  line-height: 1.8;
+  font-size: 16px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  overflow-x: hidden;
+}
+img { display: block; width: 100%; height: auto; }
+a { text-decoration: none; color: inherit; }
+
+/* ── DISPLAY FONT ── */
+.d-font {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: italic;
+  font-weight: 900;
+  line-height: 1.05;
+}
+
+/* ── CHECKERED DIVIDERS ── */
+.ck-sky {
+  height: 28px;
+  background-color: var(--sky);
+  background-image:
+    linear-gradient(45deg, var(--chalk) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--chalk) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--chalk) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--chalk) 75%);
+  background-size: 28px 28px;
+  background-position: 0 0, 0 14px, 14px -14px, -14px 0;
+}
+.ck-coral {
+  height: 28px;
+  background-color: var(--coral);
+  background-image:
+    linear-gradient(45deg, var(--dark) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--dark) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--dark) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--dark) 75%);
+  background-size: 28px 28px;
+  background-position: 0 0, 0 14px, 14px -14px, -14px 0;
+}
+.ck-dark {
+  height: 28px;
+  background-color: var(--dark);
+  background-image:
+    linear-gradient(45deg, var(--sky) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--sky) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--sky) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--sky) 75%);
+  background-size: 28px 28px;
+  background-position: 0 0, 0 14px, 14px -14px, -14px 0;
+}
+
+/* ── NAVBAR ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+  background: rgba(22,20,34,0.95);
+  backdrop-filter: blur(8px);
+  padding: 0 20px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 60px;
+  transition: height 0.3s ease, box-shadow 0.3s ease;
+  border-bottom: 2px solid var(--sky);
+}
+.nav.scrolled { height: 52px; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+.nav-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: italic; font-weight: 900;
+  font-size: 1.6rem; color: var(--sky);
+  letter-spacing: -0.5px;
+}
+.nav-logo span { color: var(--coral); }
+.nav-right { display: flex; align-items: center; gap: 12px; }
+.nav-links {
+  display: none;
+  list-style: none; gap: 28px; align-items: center;
+}
+.nav-links a {
+  font-family: 'Nunito', 'IBM Plex Sans Thai', sans-serif;
+  font-size: 0.9rem; font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  transition: color 0.2s;
+  line-height: 1.8;
+}
+.nav-links a:hover { color: var(--sky); }
+.lang-sw {
+  display: flex; align-items: center; gap: 5px;
+  color: rgba(255,255,255,0.7);
+  font-size: 0.78rem; font-weight: 600;
+  padding: 5px 8px;
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 6px;
+  transition: color 0.2s, border-color 0.2s;
+  cursor: pointer;
+  line-height: 1.8;
+}
+.lang-sw:hover { color: #fff; border-color: rgba(255,255,255,0.5); }
+.lang-sw svg { flex-shrink: 0; }
+.hamburger {
+  background: none; border: none; cursor: pointer;
+  display: flex; flex-direction: column; gap: 5px;
+  padding: 6px;
+}
+.hamburger span {
+  display: block; width: 22px; height: 2px;
+  background: #fff; border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu {
+  display: none;
+  position: fixed; top: 60px; left: 0; right: 0; z-index: 998;
+  background: var(--dark);
+  border-top: 2px solid var(--sky);
+  padding: 20px;
+  flex-direction: column; gap: 4px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: 'Nunito', 'IBM Plex Sans Thai', sans-serif;
+  font-size: 1.1rem; font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  padding: 12px 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  transition: color 0.2s;
+  line-height: 1.8;
+}
+.mobile-menu a:hover { color: var(--sky); }
+
+@media (min-width: 768px) {
+  .nav-links { display: flex; }
+  .hamburger { display: none; }
+  .mobile-menu { display: none !important; }
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex; align-items: flex-end;
+  overflow: hidden;
+  padding-top: 60px;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background: linear-gradient(135deg, var(--track) 0%, #0d1a3e 50%, #1A0820 100%);
+}
+.hero-img {
+  position: absolute; inset: 0; z-index: 1;
+  background-image: url('https://images.unsplash.com/photo-1773909722972-1f5e533798b8?w=1400&h=900&fit=crop');
+  background-size: cover; background-position: center;
+  opacity: 0.35;
+  transform: scale(1.05);
+  animation: heroZoom 8s ease-out forwards;
+}
+@keyframes heroZoom { to { transform: scale(1); opacity: 0.4; } }
+.hero-overlay {
+  position: absolute; inset: 0; z-index: 2;
+  background: linear-gradient(to top, rgba(22,20,34,0.98) 0%, rgba(22,20,34,0.6) 40%, rgba(22,20,34,0.2) 100%);
+}
+.hero-stripe {
+  position: absolute; top: 0; right: 0; z-index: 2;
+  width: 6px; height: 100%;
+  background: repeating-linear-gradient(to bottom, var(--sky) 0, var(--sky) 20px, var(--chalk) 20px, var(--chalk) 40px);
+}
+.hero-content {
+  position: relative; z-index: 3;
+  padding: 40px 24px 60px;
+  max-width: 100%;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--coral); color: #fff;
+  font-size: 0.75rem; font-weight: 700;
+  padding: 5px 12px; border-radius: 20px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.hero-h1 {
+  font-size: clamp(3.5rem, 14vw, 7.5rem);
+  color: #fff;
+  margin-bottom: 8px;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+.hero-h1 .sky { color: var(--sky); }
+.hero-h1 .coral { color: var(--coral); }
+.hero-sub {
+  font-size: clamp(1rem, 3vw, 1.25rem);
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 32px;
+  max-width: 540px;
+  line-height: 1.8;
+}
+.hero-btns { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 28px;
+  border-radius: 50px;
+  font-family: 'Nunito', 'IBM Plex Sans Thai', sans-serif;
+  font-size: 1rem; font-weight: 700;
+  cursor: pointer; border: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  line-height: 1.8;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-coral {
+  background: var(--coral); color: #fff;
+  box-shadow: 0 6px 24px rgba(255,85,119,0.5);
+}
+.btn-coral:hover { box-shadow: 0 10px 32px rgba(255,85,119,0.6); background: var(--coral-dark); }
+.btn-outline {
+  background: transparent; color: #fff;
+  border: 2px solid rgba(255,255,255,0.4);
+}
+.btn-outline:hover { border-color: var(--sky); color: var(--sky); }
+.btn-sky {
+  background: var(--sky); color: var(--dark);
+  box-shadow: 0 6px 24px rgba(24,207,255,0.4);
+}
+.btn-sky:hover { box-shadow: 0 10px 32px rgba(24,207,255,0.5); }
+.hero-stats {
+  position: absolute; bottom: 0; right: 24px; z-index: 3;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 6px;
+  padding-bottom: 60px;
+}
+.hero-stat {
+  background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px; padding: 10px 16px;
+  text-align: right;
+}
+.hero-stat-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: italic; font-weight: 900;
+  font-size: 1.8rem; color: var(--sky);
+  line-height: 1;
+}
+.hero-stat-label { font-size: 0.72rem; color: rgba(255,255,255,0.6); line-height: 1.8; }
+@media (min-width: 768px) {
+  .hero-content { max-width: 640px; padding: 60px 48px 80px; }
+  .hero-stats { flex-direction: row; align-items: flex-end; right: 48px; gap: 12px; }
+  .hero-stat { text-align: center; }
+}
+
+/* ── ABOUT ── */
+.about {
+  background: var(--chalk);
+  padding: 72px 24px;
+}
+.about-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; flex-direction: column; gap: 48px;
+}
+.section-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: italic; font-weight: 700;
+  font-size: 0.8rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--coral);
+  margin-bottom: 8px;
+}
+.section-h2 {
+  font-size: clamp(2.2rem, 7vw, 3.8rem);
+  line-height: 1.05; margin-bottom: 20px;
+}
+.about-text {
+  font-size: 1.05rem; line-height: 1.9;
+  color: #3a3650; max-width: 520px;
+  margin-bottom: 28px;
+}
+.about-img-wrap {
+  border-radius: 24px; overflow: hidden;
+  position: relative;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.15);
+}
+.about-img-wrap img { height: 280px; object-fit: cover; }
+.about-badge {
+  position: absolute; bottom: 20px; left: 20px;
+  background: var(--sky); color: var(--dark);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: italic; font-weight: 900;
+  font-size: 1.1rem; padding: 10px 18px;
+  border-radius: 50px;
+  box-shadow: 0 4px 16px rgba(24,207,255,0.4);
+}
+.about-features {
+  display: flex; flex-direction: column; gap: 16px;
+  margin-top: 8px;
+}
+.about-feat {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 16px 18px;
+  background: #fff; border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.about-feat:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+.about-feat-icon {
+  flex-shrink: 0; width: 40px; height: 40px;
+  background: var(--sky-pale); border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--sky-dark);
+}
+.about-feat-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 2px; line-height: 1.8; }
+.about-feat-desc { font-size: 0.85rem; color: #666; line-height: 1.8; }
+@media (min-width: 768px) {
+  .about-inner { flex-direction: row; align-items: center; }
+  .about-left, .about-right { flex: 1; }
+  .about-img-wrap img { height: 380px; }
+}
+
+/* ── PROGRAMS TRACK ── */
+.programs {
+  background: var(--track);
+  padding: 64px 0 48px;
+  position: relative;
+  overflow: hidden;
+}
+.programs-header {
+  padding: 0 24px 40px;
+  max-width: 1100px; margin: 0 auto;
+}
+.programs-header .section-h2 { color: #fff; }
+.programs-header .section-label { color: var(--sky); }
+.programs-header p { color: rgba(255,255,255,0.65); font-size: 1rem; line-height: 1.8; }
+.track-road {
+  position: relative;
+  padding: 0 24px 8px;
+}
+.track-line {
+  position: absolute; top: 50%; left: 0; right: 0;
+  height: 3px;
+  background: repeating-linear-gradient(to right, var(--gold) 0, var(--gold) 20px, transparent 20px, transparent 36px);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.track-scroll {
+  display: flex; gap: 20px;
+  overflow-x: auto; overflow-y: visible;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 32px 24px 40px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--sky) rgba(255,255,255,0.1);
+}
+.track-scroll::-webkit-scrollbar { height: 6px; }
+.track-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 4px; }
+.track-scroll::-webkit-scrollbar-thumb { background: var(--sky); border-radius: 4px; }
+.lane-card {
+  flex: 0 0 260px;
+  scroll-snap-align: start;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.lane-card:hover { transform: translateY(-6px) scale(1.01); box-shadow: 0 16px 48px rgba(0,0,0,0.4); }
+.lane-top {
+  height: 7px;
+}
+.lane-top--sky { background: var(--sky); }
+.lane-top--coral { background: var(--coral); }
+.lane-top--gold { background: var(--gold); }
+.lane-img { height: 160px; overflow: hidden; }
+.lane-img img { height: 100%; object-fit: cover; transition: transform 0.4s; }
+.lane-card:hover .lane-img img { transform: scale(1.06); }
+.lane-body { padding: 20px 20px 24px; }
+.lane-age {
+  display: inline-block;
+  background: var(--sky-pale);
+  color: var(--sky-dark);
+  font-size: 0.73rem; font-weight: 700;
+  padding: 3px 10px; border-radius: 12px;
+  margin-bottom: 8px;
+}
+.lane-age--coral { background: #FFE8ED; color: var(--coral-dark); }
+.lane-age--gold { background: #FFF8DC; color: #B8860B; }
+.lane-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: italic; font-weight: 900;
+  font-size: 1.5rem; line-height: 1.1;
+  margin-bottom: 8px;
+}
+.lane-desc { font-size: 0.85rem; line-height: 1.8; color: #555; margin-bottom: 16px; }
+.lane-price {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: italic; font-weight: 900;
+  font-size: 1.6rem; color: var(--coral);
+}
+.lane-price span { font-size: 0.8rem; font-style: normal; font-weight: 600; color: #999; }
+.lane-cta {
+  display: block; text-align: center;
+  margin-top: 14px; padding: 11px 20px;
+  border-radius: 50px;
+  font-family: 'Nunito', 'IBM Plex Sans Thai', sans-serif;
+  font-size: 0.9rem; font-weight: 700;
+  cursor: pointer; border: none;
+  background: var(--coral); color: #fff;
+  transition: background 0.25s, transform 0.2s;
+  line-height: 1.8;
+}
+.lane-cta--sky { background: var(--sky); color: var(--dark); }
+.lane-cta--gold { background: var(--gold); color: var(--dark); }
+.lane-cta:hover { transform: scale(1.03); filter: brightness(1.08); }
+.scroll-hint {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  color: rgba(255,255,255,0.45);
+  font-size: 0.8rem; padding-bottom: 16px;
+}
+@media (min-width: 768px) {
+  .lane-card { flex: 0 0 300px; }
+}
+
+/* ── HOW IT WORKS ── */
+.hiw {
+  background: var(--chalk);
+  padding: 72px 24px;
+}
+.hiw-inner { max-width: 900px; margin: 0 auto; }
+.hiw-steps {
+  position: relative;
+  margin-top: 48px;
+  display: flex; flex-direction: column; gap: 0;
+}
+.hiw-steps::before {
+  content: '';
+  position: absolute; left: 24px; top: 0; bottom: 0; width: 3px;
+  background: repeating-linear-gradient(to bottom, var(--sky) 0, var(--sky) 16px, transparent 16px, transparent 28px);
+}
+.hiw-step {
+  display: flex; gap: 24px;
+  padding: 0 0 40px 0;
+  position: relative;
+}
+.hiw-num-wrap {
+  flex-shrink: 0;
+  display: flex; flex-direction: column; align-items: center;
+}
+.hiw-num {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: var(--sky); color: var(--dark);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: italic; font-weight: 900;
+  font-size: 1.3rem;
+  box-shadow: 0 0 0 4px var(--chalk), 0 0 0 6px var(--sky);
+  z-index: 1;
+  flex-shrink: 0;
+}
+.hiw-num--coral { background: var(--coral); box-shadow: 0 0 0 4px var(--chalk), 0 0 0 6px var(--coral); }
+.hiw-text { padding-top: 8px; }
+.hiw-step-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 4px; line-height: 1.8; }
+.hiw-step-desc { font-size: 0.92rem; color: #555; line-height: 1.8; max-width: 500px; }
+.hiw-img {
+  display: none;
+}
+@media (min-width: 768px) {
+  .hiw-steps::before { left: 32px; }
+  .hiw-img {
+    display: block;
+    border-radius: 20px; overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+    margin-top: 48px;
+  }
+  .hiw-img img { height: 300px; object-fit: cover; }
+  .hiw-num { width: 64px; height: 64px; font-size: 1.6rem; }
+}
+
+/* ── GALLERY ── */
+.gallery {
+  background: var(--dark);
+  padding: 64px 0 48px;
+}
+.gallery-header {
+  padding: 0 24px 32px;
+}
+.gallery-header .section-h2 { color: #fff; }
+.gallery-header .section-label { color: var(--coral); }
+.gallery-scroll {
+  display: flex; gap: 16px;
+  overflow-x: auto; overflow-y: visible;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 8px 24px 24px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--coral) rgba(255,255,255,0.1);
+}
+.gallery-scroll::-webkit-scrollbar { height: 5px; }
+.gallery-scroll::-webkit-scrollbar-thumb { background: var(--coral); border-radius: 4px; }
+.gal-item {
+  flex: 0 0 240px;
+  scroll-snap-align: start;
+  border-radius: 16px; overflow: hidden;
+  position: relative;
+}
+.gal-item img {
+  height: 200px; object-fit: cover;
+  transition: transform 0.4s, filter 0.3s;
+}
+.gal-item:hover img { transform: scale(1.08); filter: brightness(1.1); }
+.gal-item:nth-child(even) { margin-top: 24px; }
+.gal-caption {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
+  display: flex; align-items: flex-end;
+  padding: 14px;
+}
+.gal-caption span { font-size: 0.8rem; color: rgba(255,255,255,0.9); font-weight: 600; line-height: 1.8; }
+@media (min-width: 768px) {
+  .gal-item { flex: 0 0 320px; }
+  .gal-item img { height: 280px; }
+}
+
+/* ── SAFETY ── */
+.safety {
+  background: var(--sky-pale);
+  padding: 72px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.safety::before {
+  content: '';
+  position: absolute; top: -40px; right: -40px;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  background: var(--sky);
+  opacity: 0.12;
+}
+.safety-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; flex-direction: column; gap: 48px;
+  position: relative; z-index: 1;
+}
+.safety-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin-top: 32px;
+}
+.safety-card {
+  background: #fff; border-radius: 18px;
+  padding: 24px 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  transition: transform 0.25s;
+}
+.safety-card:hover { transform: translateY(-3px); }
+.safety-icon {
+  width: 44px; height: 44px;
+  background: var(--sky); border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--dark); margin-bottom: 14px;
+}
+.safety-icon--coral { background: var(--coral); color: #fff; }
+.safety-card-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; line-height: 1.8; }
+.safety-card-desc { font-size: 0.82rem; color: #666; line-height: 1.8; }
+.safety-img-wrap {
+  border-radius: 24px; overflow: hidden;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.15);
+}
+.safety-img-wrap img { height: 280px; object-fit: cover; }
+@media (min-width: 768px) {
+  .safety-inner { flex-direction: row; align-items: center; }
+  .safety-left, .safety-right { flex: 1; }
+  .safety-grid { grid-template-columns: 1fr 1fr; }
+  .safety-img-wrap img { height: 400px; }
+}
+
+/* ── TESTIMONIALS ── */
+.testi {
+  background: var(--chalk);
+  padding: 72px 24px;
+}
+.testi-inner { max-width: 1100px; margin: 0 auto; }
+.testi-scroll {
+  display: flex; gap: 20px;
+  overflow-x: auto; overflow-y: visible;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 24px 0 16px;
+  scrollbar-width: none;
+}
+.testi-scroll::-webkit-scrollbar { display: none; }
+.testi-card {
+  flex: 0 0 280px;
+  scroll-snap-align: start;
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  position: relative;
+  transition: transform 0.25s;
+}
+.testi-card:hover { transform: translateY(-4px); }
+.testi-card::before {
+  content: '"';
+  position: absolute; top: -10px; left: 20px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: italic; font-weight: 900;
+  font-size: 5rem; color: var(--sky);
+  line-height: 1;
+  opacity: 0.2;
+}
+.testi-stars {
+  display: flex; gap: 3px; margin-bottom: 12px;
+  color: var(--gold);
+}
+.testi-text { font-size: 0.92rem; line-height: 1.9; color: #444; margin-bottom: 18px; }
+.testi-author { display: flex; align-items: center; gap: 12px; }
+.testi-avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  overflow: hidden; flex-shrink: 0;
+  border: 2px solid var(--sky);
+}
+.testi-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.testi-name { font-weight: 700; font-size: 0.9rem; line-height: 1.8; }
+.testi-role { font-size: 0.78rem; color: #999; line-height: 1.8; }
+@media (min-width: 768px) {
+  .testi-card { flex: 0 0 320px; }
+}
+
+/* ── CTA ── */
+.cta-section {
+  background: linear-gradient(135deg, var(--coral) 0%, #FF3366 60%, #C0185A 100%);
+  padding: 80px 24px;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(255,255,255,0.05) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.05) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.05) 75%);
+  background-size: 40px 40px;
+  background-position: 0 0, 0 20px, 20px -20px, -20px 0;
+}
+.cta-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+.cta-h2 {
+  color: #fff; margin-bottom: 16px;
+  font-size: clamp(2.2rem, 8vw, 4rem);
+}
+.cta-sub { color: rgba(255,255,255,0.85); font-size: 1.1rem; line-height: 1.8; margin-bottom: 36px; }
+.cta-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+.btn-white {
+  background: #fff; color: var(--coral);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.2);
+}
+.btn-white:hover { background: #f0f0f0; box-shadow: 0 10px 32px rgba(0,0,0,0.25); }
+.btn-outline-white {
+  background: transparent; color: #fff;
+  border: 2px solid rgba(255,255,255,0.5);
+}
+.btn-outline-white:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--dark);
+  padding: 48px 24px 32px;
+  color: rgba(255,255,255,0.6);
+}
+.footer-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; flex-direction: column; gap: 36px;
+}
+.footer-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: italic; font-weight: 900;
+  font-size: 1.8rem; color: var(--sky);
+  margin-bottom: 8px;
+}
+.footer-logo span { color: var(--coral); }
+.footer-tagline { font-size: 0.9rem; line-height: 1.8; max-width: 280px; }
+.footer-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+.footer-col h4 {
+  font-size: 0.8rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.9); margin-bottom: 14px;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.footer-col ul li a {
+  font-size: 0.88rem; color: rgba(255,255,255,0.5);
+  transition: color 0.2s; line-height: 1.8;
+}
+.footer-col ul li a:hover { color: var(--sky); }
+.footer-contact { display: flex; flex-direction: column; gap: 10px; }
+.footer-contact-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.8;
+}
+.footer-contact-item i { margin-top: 3px; flex-shrink: 0; color: var(--sky); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 24px;
+  display: flex; flex-direction: column; gap: 8px;
+  font-size: 0.8rem; color: rgba(255,255,255,0.3);
+}
+@media (min-width: 768px) {
+  .footer-inner { flex-direction: row; flex-wrap: wrap; }
+  .footer-brand { flex: 1 1 240px; }
+  .footer-cols { grid-template-columns: 1fr 1fr 1fr; flex: 2 1 400px; gap: 20px; }
+  .footer-bottom { flex-direction: row; justify-content: space-between; }
+}
+
+/* ── THAI OVERRIDES (no letter-spacing, no text-transform) ── */
+html[lang="th"] .section-label,
+html[lang="th"] .hero-tag {
+  letter-spacing: 0;
+  text-transform: none;
+}
+html[lang="th"] .footer-col h4 {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* ── REVEAL ANIMATIONS ── */
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left {
+  opacity: 0; transform: translateX(-28px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+.reveal-right {
+  opacity: 0; transform: translateX(28px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+</style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">Kid's<span>Kart</span></a>
+  <ul class="nav-links">
+    <li><a href="#about" data-lang-th="เกี่ยวกับเรา" data-lang-en="About">เกี่ยวกับเรา</a></li>
+    <li><a href="#programs" data-lang-th="โปรแกรม" data-lang-en="Programs">โปรแกรม</a></li>
+    <li><a href="#how" data-lang-th="วิธีสมัคร" data-lang-en="How It Works">วิธีสมัคร</a></li>
+    <li><a href="#safety" data-lang-th="ความปลอดภัย" data-lang-en="Safety">ความปลอดภัย</a></li>
+    <li><a href="#contact" class="btn btn-coral" style="padding:8px 18px;font-size:0.85rem;" data-lang-th="จองเลย" data-lang-en="Book Now">จองเลย</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="lang-sw" aria-label="Switch language">
+      <i data-lucide="globe" width="14" height="14"></i>
+      <span class="lang-sw__label">TH</span>
+    </button>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ── MOBILE MENU ── -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" data-lang-th="เกี่ยวกับเรา" data-lang-en="About">เกี่ยวกับเรา</a>
+  <a href="#programs" data-lang-th="โปรแกรม" data-lang-en="Programs">โปรแกรม</a>
+  <a href="#how" data-lang-th="วิธีสมัคร" data-lang-en="How It Works">วิธีสมัคร</a>
+  <a href="#safety" data-lang-th="ความปลอดภัย" data-lang-en="Safety">ความปลอดภัย</a>
+  <a href="#contact" data-lang-th="ติดต่อเรา" data-lang-en="Contact Us">ติดต่อเรา</a>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-img"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-stripe"></div>
+  <div class="hero-content">
+    <div class="hero-tag">
+      <i data-lucide="flag" width="13" height="13"></i>
+      <span data-lang-th="สนามโกคาร์ตสำหรับเด็ก" data-lang-en="Kids Go-Kart Track">สนามโกคาร์ตสำหรับเด็ก</span>
+    </div>
+    <h1 class="hero-h1 d-font">
+      <span class="sky" data-lang-th="พุ่งสู่" data-lang-en="BORN TO">พุ่งสู่</span><br>
+      <span class="coral" data-lang-th="เส้นชัย!" data-lang-en="RACE!">เส้นชัย!</span>
+    </h1>
+    <p class="hero-sub" data-lang-th="สนามโกคาร์ตที่ออกแบบมาเพื่อนักแข่งตัวเล็ก สนุก ปลอดภัย ตื่นเต้นทุกรอบ! สำหรับเด็กอายุ 5–16 ปี" data-lang-en="The go-kart track built for little racers — fun, safe, and thrilling every lap! For kids aged 5–16.">สนามโกคาร์ตที่ออกแบบมาเพื่อนักแข่งตัวเล็ก สนุก ปลอดภัย ตื่นเต้นทุกรอบ! สำหรับเด็กอายุ 5–16 ปี</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn btn-coral">
+        <i data-lucide="flag-triangle-right" width="18" height="18"></i>
+        <span data-lang-th="จองตอนนี้เลย" data-lang-en="Book Now">จองตอนนี้เลย</span>
+      </a>
+      <a href="#programs" class="btn btn-outline">
+        <span data-lang-th="ดูโปรแกรมทั้งหมด" data-lang-en="View Programs">ดูโปรแกรมทั้งหมด</span>
+        <i data-lucide="chevron-right" width="18" height="18"></i>
+      </a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">500+</div>
+      <div class="hero-stat-label" data-lang-th="นักแข่งน้อย" data-lang-en="Young Racers">นักแข่งน้อย</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">3</div>
+      <div class="hero-stat-label" data-lang-th="สนามแข่ง" data-lang-en="Race Tracks">สนามแข่ง</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">5★</div>
+      <div class="hero-stat-label" data-lang-th="รีวิวจากครอบครัว" data-lang-en="Family Reviews">รีวิวจากครอบครัว</div>
+    </div>
+  </div>
+</section>
+
+<div class="ck-sky"></div>
+
+<!-- ── ABOUT ── -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-left reveal-left">
+      <div class="about-img-wrap">
+        <img src="https://images.unsplash.com/photo-1774088626603-4881c815d93c?w=700&h=500&fit=crop" alt="Go-kart racing on a sunny day">
+        <div class="about-badge" data-lang-th="สนุกทุกวันหยุด!" data-lang-en="Fun every weekend!">สนุกทุกวันหยุด!</div>
+      </div>
+    </div>
+    <div class="about-right reveal-right">
+      <p class="section-label" data-lang-th="เกี่ยวกับเรา" data-lang-en="About Us">เกี่ยวกับเรา</p>
+      <h2 class="section-h2 d-font" data-lang-th="Kid's Kart คืออะไร?" data-lang-en="What is Kid's Kart?">Kid's Kart คืออะไร?</h2>
+      <p class="about-text" data-lang-th="เราคือสนามโกคาร์ตสำหรับเด็กอายุ 5–16 ปี ที่เชื่อว่าทุกเด็กมีนักแข่งอยู่ในตัว ด้วยรถที่ปลอดภัย เส้นทางที่สนุก และทีมงานที่ใส่ใจ Kid's Kart คือสถานที่ที่ทำให้วันหยุดสุดสัปดาห์ของครอบครัวคุณน่าจดจำ" data-lang-en="We're a go-kart track designed for kids aged 5–16. We believe every child has a racer inside. With safe karts, exciting tracks, and a caring team, Kid's Kart turns your family weekends into something unforgettable.">เราคือสนามโกคาร์ตสำหรับเด็กอายุ 5–16 ปี ที่เชื่อว่าทุกเด็กมีนักแข่งอยู่ในตัว ด้วยรถที่ปลอดภัย เส้นทางที่สนุก และทีมงานที่ใส่ใจ Kid's Kart คือสถานที่ที่ทำให้วันหยุดสุดสัปดาห์ของครอบครัวคุณน่าจดจำ</p>
+      <div class="about-features">
+        <div class="about-feat">
+          <div class="about-feat-icon"><i data-lucide="shield-check" width="20" height="20"></i></div>
+          <div>
+            <div class="about-feat-title" data-lang-th="ปลอดภัย 100%" data-lang-en="100% Safe">ปลอดภัย 100%</div>
+            <div class="about-feat-desc" data-lang-th="มาตรฐานสากล ตรวจสอบทุกวัน" data-lang-en="International standards, checked daily">มาตรฐานสากล ตรวจสอบทุกวัน</div>
+          </div>
+        </div>
+        <div class="about-feat">
+          <div class="about-feat-icon"><i data-lucide="users" width="20" height="20"></i></div>
+          <div>
+            <div class="about-feat-title" data-lang-th="โค้ชผู้เชี่ยวชาญ" data-lang-en="Expert Coaches">โค้ชผู้เชี่ยวชาญ</div>
+            <div class="about-feat-desc" data-lang-th="ทีมงานผ่านการฝึกอบรม ดูแลทุกขั้นตอน" data-lang-en="Trained staff, every step of the way">ทีมงานผ่านการฝึกอบรม ดูแลทุกขั้นตอน</div>
+          </div>
+        </div>
+        <div class="about-feat">
+          <div class="about-feat-icon"><i data-lucide="smile" width="20" height="20"></i></div>
+          <div>
+            <div class="about-feat-title" data-lang-th="สนุกสุดๆ" data-lang-en="Pure Fun">สนุกสุดๆ</div>
+            <div class="about-feat-desc" data-lang-th="เด็กๆ กลับบ้านพร้อมรอยยิ้มทุกครั้ง" data-lang-en="Kids always leave with a big smile">เด็กๆ กลับบ้านพร้อมรอยยิ้มทุกครั้ง</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ck-coral"></div>
+
+<!-- ── PROGRAMS ── -->
+<section class="programs" id="programs">
+  <div class="programs-header reveal">
+    <p class="section-label" data-lang-th="เลือกโปรแกรมที่ใช่" data-lang-en="Choose Your Program">เลือกโปรแกรมที่ใช่</p>
+    <h2 class="section-h2 d-font" data-lang-th="ขับแบบไหน คุณก็เลือกได้!" data-lang-en="Pick Your Lane!">ขับแบบไหน คุณก็เลือกได้!</h2>
+    <p data-lang-th="ตั้งแต่นักแข่งมือใหม่จนถึงขาแข่งตัวจริง เรามีโปรแกรมสำหรับทุกคน" data-lang-en="From first-timers to little speed demons — we have a program for every racer.">ตั้งแต่นักแข่งมือใหม่จนถึงขาแข่งตัวจริง เรามีโปรแกรมสำหรับทุกคน</p>
+  </div>
+  <div class="track-scroll">
+    <!-- Lane 1 -->
+    <div class="lane-card">
+      <div class="lane-top lane-top--sky"></div>
+      <div class="lane-img">
+        <img src="https://images.unsplash.com/photo-1752348622936-d81ed3d3152b?w=600&h=320&fit=crop" alt="Beginner go-kart track">
+      </div>
+      <div class="lane-body">
+        <div class="lane-age" data-lang-th="อายุ 5–7 ปี" data-lang-en="Ages 5–7">อายุ 5–7 ปี</div>
+        <div class="lane-title d-font" data-lang-th="แทร็กเริ่มต้น" data-lang-en="Starter Track">แทร็กเริ่มต้น</div>
+        <p class="lane-desc" data-lang-th="สำหรับนักแข่งน้อยที่เพิ่งเริ่มต้น ความเร็วต่ำ ปลอดภัย เส้นทางสั้น สนุกง่ายๆ" data-lang-en="For brand-new little racers — low speed, short track, easy and super fun.">สำหรับนักแข่งน้อยที่เพิ่งเริ่มต้น ความเร็วต่ำ ปลอดภัย เส้นทางสั้น สนุกง่ายๆ</p>
+        <div class="lane-price">฿299 <span data-lang-th="/ รอบ" data-lang-en="/ session">/ รอบ</span></div>
+        <button class="lane-cta lane-cta--sky" data-lang-th="เลือกโปรแกรมนี้" data-lang-en="Choose This">เลือกโปรแกรมนี้</button>
+      </div>
+    </div>
+    <!-- Lane 2 -->
+    <div class="lane-card">
+      <div class="lane-top lane-top--coral"></div>
+      <div class="lane-img">
+        <img src="https://images.unsplash.com/photo-1560990816-40806313d4ba?w=600&h=320&fit=crop" alt="Junior racer go-karts">
+      </div>
+      <div class="lane-body">
+        <div class="lane-age lane-age--coral" data-lang-th="อายุ 8–11 ปี" data-lang-en="Ages 8–11">อายุ 8–11 ปี</div>
+        <div class="lane-title d-font" data-lang-th="จูเนียร์เรสเซอร์" data-lang-en="Junior Racer">จูเนียร์เรสเซอร์</div>
+        <p class="lane-desc" data-lang-th="ท้าทายขึ้นอีกนิด เส้นทางยาวขึ้น ความเร็วเพิ่มขึ้น สำหรับเด็กที่เริ่มชอบความเร็ว" data-lang-en="A step up — longer track, more speed, for kids who love the rush.">ท้าทายขึ้นอีกนิด เส้นทางยาวขึ้น ความเร็วเพิ่มขึ้น สำหรับเด็กที่เริ่มชอบความเร็ว</p>
+        <div class="lane-price">฿399 <span data-lang-th="/ รอบ" data-lang-en="/ session">/ รอบ</span></div>
+        <button class="lane-cta" data-lang-th="เลือกโปรแกรมนี้" data-lang-en="Choose This">เลือกโปรแกรมนี้</button>
+      </div>
+    </div>
+    <!-- Lane 3 -->
+    <div class="lane-card">
+      <div class="lane-top lane-top--gold"></div>
+      <div class="lane-img">
+        <img src="https://images.unsplash.com/photo-1752348510798-9c8dd2cb6541?w=600&h=320&fit=crop" alt="Speed academy racing">
+      </div>
+      <div class="lane-body">
+        <div class="lane-age lane-age--gold" data-lang-th="อายุ 12–16 ปี" data-lang-en="Ages 12–16">อายุ 12–16 ปี</div>
+        <div class="lane-title d-font" data-lang-th="สปีดอคาเดมี" data-lang-en="Speed Academy">สปีดอคาเดมี</div>
+        <p class="lane-desc" data-lang-th="สำหรับสายแข่งตัวจริง สนามเต็มรูปแบบ ความเร็วสูง โค้ชติดตามพัฒนาการ" data-lang-en="For the real racers — full track, high speed, with coach-tracked progress.">สำหรับสายแข่งตัวจริง สนามเต็มรูปแบบ ความเร็วสูง โค้ชติดตามพัฒนาการ</p>
+        <div class="lane-price">฿599 <span data-lang-th="/ รอบ" data-lang-en="/ session">/ รอบ</span></div>
+        <button class="lane-cta lane-cta--gold" data-lang-th="เลือกโปรแกรมนี้" data-lang-en="Choose This">เลือกโปรแกรมนี้</button>
+      </div>
+    </div>
+    <!-- Lane 4 -->
+    <div class="lane-card">
+      <div class="lane-top lane-top--coral"></div>
+      <div class="lane-img">
+        <img src="https://images.unsplash.com/photo-1779128773287-923183d53f94?w=600&h=320&fit=crop" alt="Birthday party go-kart race">
+      </div>
+      <div class="lane-body">
+        <div class="lane-age lane-age--coral" data-lang-th="ปาร์ตี้ / กลุ่ม" data-lang-en="Party / Group">ปาร์ตี้ / กลุ่ม</div>
+        <div class="lane-title d-font" data-lang-th="แพ็คปาร์ตี้" data-lang-en="Party Pack">แพ็คปาร์ตี้</div>
+        <p class="lane-desc" data-lang-th="ฉลองวันเกิดหรือทริปกลุ่มที่ไม่เหมือนใคร รวมเค้ก เกม และรอบพิเศษ" data-lang-en="Birthday or group trips unlike any other — includes cake, games, and special laps.">ฉลองวันเกิดหรือทริปกลุ่มที่ไม่เหมือนใคร รวมเค้ก เกม และรอบพิเศษ</p>
+        <div class="lane-price">฿2,499 <span data-lang-th="/ กลุ่ม" data-lang-en="/ group">/ กลุ่ม</span></div>
+        <button class="lane-cta" data-lang-th="สอบถามเพิ่มเติม" data-lang-en="Enquire Now">สอบถามเพิ่มเติม</button>
+      </div>
+    </div>
+    <!-- Lane 5 -->
+    <div class="lane-card">
+      <div class="lane-top lane-top--sky"></div>
+      <div class="lane-img">
+        <img src="https://images.unsplash.com/photo-1585099750816-7175d0928c76?w=600&h=320&fit=crop" alt="Family go-karting fun">
+      </div>
+      <div class="lane-body">
+        <div class="lane-age" data-lang-th="ทั้งครอบครัว" data-lang-en="Whole Family">ทั้งครอบครัว</div>
+        <div class="lane-title d-font" data-lang-th="แพ็คครอบครัว" data-lang-en="Family Pack">แพ็คครอบครัว</div>
+        <p class="lane-desc" data-lang-th="สนุกด้วยกันทั้งบ้าน! รวม 4 รอบสำหรับทุกคนในครอบครัว ลด 20% ทันที" data-lang-en="Race together as a family! Includes 4 sessions for everyone — 20% off instantly.">สนุกด้วยกันทั้งบ้าน! รวม 4 รอบสำหรับทุกคนในครอบครัว ลด 20% ทันที</p>
+        <div class="lane-price">฿1,299 <span data-lang-th="/ แพ็ค" data-lang-en="/ pack">/ แพ็ค</span></div>
+        <button class="lane-cta lane-cta--sky" data-lang-th="เลือกโปรแกรมนี้" data-lang-en="Choose This">เลือกโปรแกรมนี้</button>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <i data-lucide="mouse-pointer-2" width="14" height="14"></i>
+    <span data-lang-th="เลื่อนเพื่อดูโปรแกรมทั้งหมด" data-lang-en="Scroll to see all programs">เลื่อนเพื่อดูโปรแกรมทั้งหมด</span>
+  </div>
+</section>
+
+<div class="ck-dark"></div>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="hiw" id="how">
+  <div class="hiw-inner">
+    <div class="reveal">
+      <p class="section-label" data-lang-th="ขั้นตอนง่ายๆ" data-lang-en="Simple Steps">ขั้นตอนง่ายๆ</p>
+      <h2 class="section-h2 d-font" data-lang-th="เริ่มแข่งใน 4 ขั้นตอน" data-lang-en="Race in 4 Easy Steps">เริ่มแข่งใน 4 ขั้นตอน</h2>
+    </div>
+    <div class="hiw-steps">
+      <div class="hiw-step reveal">
+        <div class="hiw-num-wrap">
+          <div class="hiw-num">1</div>
+        </div>
+        <div class="hiw-text">
+          <div class="hiw-step-title" data-lang-th="ลงทะเบียนออนไลน์" data-lang-en="Register Online">ลงทะเบียนออนไลน์</div>
+          <p class="hiw-step-desc" data-lang-th="จองที่นั่งล่วงหน้าผ่านเว็บไซต์หรือโทรหาเราได้เลย ไม่มีค่าธรรมเนียมเพิ่มเติม" data-lang-en="Book your spot in advance via our website or give us a call — no extra fees.">จองที่นั่งล่วงหน้าผ่านเว็บไซต์หรือโทรหาเราได้เลย ไม่มีค่าธรรมเนียมเพิ่มเติม</p>
+        </div>
+      </div>
+      <div class="hiw-step reveal">
+        <div class="hiw-num-wrap">
+          <div class="hiw-num hiw-num--coral">2</div>
+        </div>
+        <div class="hiw-text">
+          <div class="hiw-step-title" data-lang-th="รับอุปกรณ์ความปลอดภัย" data-lang-en="Get Your Gear">รับอุปกรณ์ความปลอดภัย</div>
+          <p class="hiw-step-desc" data-lang-th="เจ้าหน้าที่จะช่วยสวมหมวกนิรภัยและชุดป้องกันให้น้องๆ อย่างถูกต้อง" data-lang-en="Our staff will fit your child's helmet and protective gear perfectly.">เจ้าหน้าที่จะช่วยสวมหมวกนิรภัยและชุดป้องกันให้น้องๆ อย่างถูกต้อง</p>
+        </div>
+      </div>
+      <div class="hiw-step reveal">
+        <div class="hiw-num-wrap">
+          <div class="hiw-num">3</div>
+        </div>
+        <div class="hiw-text">
+          <div class="hiw-step-title" data-lang-th="รับการแนะนำจากโค้ช" data-lang-en="Coach Briefing">รับการแนะนำจากโค้ช</div>
+          <p class="hiw-step-desc" data-lang-th="โค้ชจะอธิบายกฎความปลอดภัยและเทคนิคการขับขี่เบื้องต้น สั้นๆ แต่ครบถ้วน" data-lang-en="A quick safety and driving briefing from our coach — short, complete, and fun.">โค้ชจะอธิบายกฎความปลอดภัยและเทคนิคการขับขี่เบื้องต้น สั้นๆ แต่ครบถ้วน</p>
+        </div>
+      </div>
+      <div class="hiw-step reveal">
+        <div class="hiw-num-wrap">
+          <div class="hiw-num hiw-num--coral">4</div>
+        </div>
+        <div class="hiw-text">
+          <div class="hiw-step-title" data-lang-th="ออกสตาร์ท แล้วสนุกได้เลย!" data-lang-en="Start Your Engines!">ออกสตาร์ท แล้วสนุกได้เลย!</div>
+          <p class="hiw-step-desc" data-lang-th="ไฟเขียว! ถึงเวลาลงสนามแล้ว เร็ว แรง สนุกสุดๆ ทุกรอบ" data-lang-en="Green light! Hit the track — fast, thrilling, and a total blast every single lap.">ไฟเขียว! ถึงเวลาลงสนามแล้ว เร็ว แรง สนุกสุดๆ ทุกรอบ</p>
+        </div>
+      </div>
+    </div>
+    <div class="hiw-img reveal">
+      <img src="https://images.unsplash.com/photo-1752348511598-e30c96fb7cd2?w=1000&h=400&fit=crop" alt="Driver in racing suit on a colorful go-kart">
+    </div>
+  </div>
+</section>
+
+<div class="ck-sky"></div>
+
+<!-- ── GALLERY ── -->
+<section class="gallery" id="gallery">
+  <div class="gallery-header reveal">
+    <p class="section-label" data-lang-th="ภาพจากสนาม" data-lang-en="From the Track">ภาพจากสนาม</p>
+    <h2 class="section-h2 d-font" style="color:#fff;" data-lang-th="ความสนุกที่คุณต้องเห็น" data-lang-en="See the Fun Yourself">ความสนุกที่คุณต้องเห็น</h2>
+  </div>
+  <div class="gallery-scroll">
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1773909722972-1f5e533798b8?w=480&h=400&fit=crop" alt="Three go-karts racing on a track">
+      <div class="gal-caption"><span data-lang-th="เริ่มแข่ง!" data-lang-en="Race start!">เริ่มแข่ง!</span></div>
+    </div>
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1752348622936-d81ed3d3152b?w=480&h=400&fit=crop" alt="Colorful go-kart on track">
+      <div class="gal-caption"><span data-lang-th="ความเร็วสุดๆ" data-lang-en="Full speed!">ความเร็วสุดๆ</span></div>
+    </div>
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1560990816-40806313d4ba?w=480&h=400&fit=crop" alt="Colorful go-karts lined up">
+      <div class="gal-caption"><span data-lang-th="พร้อมลงสนาม" data-lang-en="Ready to roll">พร้อมลงสนาม</span></div>
+    </div>
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1779128773287-923183d53f94?w=480&h=400&fit=crop" alt="Group go-kart racing">
+      <div class="gal-caption"><span data-lang-th="ทีมสนุก!" data-lang-en="Team race!">ทีมสนุก!</span></div>
+    </div>
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1774071900449-819711844861?w=480&h=400&fit=crop" alt="Go-kart on race track">
+      <div class="gal-caption"><span data-lang-th="เข้าโค้ง" data-lang-en="Taking the corner">เข้าโค้ง</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="ck-coral"></div>
+
+<!-- ── SAFETY ── -->
+<section class="safety" id="safety">
+  <div class="safety-inner">
+    <div class="safety-left reveal-left">
+      <p class="section-label" data-lang-th="ผู้ปกครองวางใจได้" data-lang-en="Parents Can Trust Us">ผู้ปกครองวางใจได้</p>
+      <h2 class="section-h2 d-font" data-lang-th="ความปลอดภัยคืออันดับแรก" data-lang-en="Safety Comes First">ความปลอดภัยคืออันดับแรก</h2>
+      <p style="color:#3a3650;line-height:1.9;margin-bottom:12px;" data-lang-th="เราเข้าใจว่าผู้ปกครองทุกคนอยากให้ลูกสนุกและปลอดภัยในเวลาเดียวกัน Kid's Kart จึงลงทุนกับมาตรการความปลอดภัยอย่างจริงจัง" data-lang-en="We know every parent wants their child to have fun AND be safe. At Kid's Kart, safety is never an afterthought.">เราเข้าใจว่าผู้ปกครองทุกคนอยากให้ลูกสนุกและปลอดภัยในเวลาเดียวกัน Kid's Kart จึงลงทุนกับมาตรการความปลอดภัยอย่างจริงจัง</p>
+      <div class="safety-grid">
+        <div class="safety-card">
+          <div class="safety-icon"><i data-lucide="hard-hat" width="20" height="20"></i></div>
+          <div class="safety-card-title" data-lang-th="หมวกนิรภัยมาตรฐาน" data-lang-en="Certified Helmets">หมวกนิรภัยมาตรฐาน</div>
+          <div class="safety-card-desc" data-lang-th="หมวกทุกใบได้รับการรับรองมาตรฐานสากล" data-lang-en="Every helmet meets international safety certification.">หมวกทุกใบได้รับการรับรองมาตรฐานสากล</div>
+        </div>
+        <div class="safety-card">
+          <div class="safety-icon safety-icon--coral"><i data-lucide="activity" width="20" height="20"></i></div>
+          <div class="safety-card-title" data-lang-th="ตรวจสอบรถทุกวัน" data-lang-en="Daily Kart Checks">ตรวจสอบรถทุกวัน</div>
+          <div class="safety-card-desc" data-lang-th="รถทุกคันผ่านการตรวจสอบก่อนเปิดสนามทุกครั้ง" data-lang-en="Every kart is inspected before the track opens.">รถทุกคันผ่านการตรวจสอบก่อนเปิดสนามทุกครั้ง</div>
+        </div>
+        <div class="safety-card">
+          <div class="safety-icon"><i data-lucide="user-check" width="20" height="20"></i></div>
+          <div class="safety-card-title" data-lang-th="เจ้าหน้าที่ดูแลตลอด" data-lang-en="Staff Always Present">เจ้าหน้าที่ดูแลตลอด</div>
+          <div class="safety-card-desc" data-lang-th="ทีมงานพร้อมช่วยเหลือในทุกจุดของสนาม" data-lang-en="Staff at every point of the track at all times.">ทีมงานพร้อมช่วยเหลือในทุกจุดของสนาม</div>
+        </div>
+        <div class="safety-card">
+          <div class="safety-icon safety-icon--coral"><i data-lucide="speed" width="20" height="20"></i></div>
+          <div class="safety-card-title" data-lang-th="ระบบควบคุมความเร็ว" data-lang-en="Speed Control System">ระบบควบคุมความเร็ว</div>
+          <div class="safety-card-desc" data-lang-th="รถทุกคันมีระบบจำกัดความเร็วตามช่วงอายุ" data-lang-en="All karts have age-appropriate speed limiters.">รถทุกคันมีระบบจำกัดความเร็วตามช่วงอายุ</div>
+        </div>
+      </div>
+    </div>
+    <div class="safety-right reveal-right">
+      <div class="safety-img-wrap">
+        <img src="https://images.unsplash.com/photo-1515040971733-a71e8e57ce78?w=700&h=600&fit=crop" alt="Racing helmet safety gear">
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ck-dark"></div>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="testi" id="testimonials">
+  <div class="testi-inner">
+    <div class="reveal">
+      <p class="section-label" data-lang-th="เสียงจากครอบครัว" data-lang-en="What Families Say">เสียงจากครอบครัว</p>
+      <h2 class="section-h2 d-font" data-lang-th="ครอบครัวที่รัก Kid's Kart" data-lang-en="Families Love Kid's Kart">ครอบครัวที่รัก Kid's Kart</h2>
+    </div>
+    <div class="testi-scroll">
+      <div class="testi-card">
+        <div class="testi-stars">
+          <i data-lucide="star" width="14" height="14" style="fill:var(--gold);color:var(--gold)"></i>
+          <i data-lucide="star" width="14" height="14" style="fill:var(--gold);color:var(--gold)"></i>
+          <i data-lucide="star" width="14" height="14" style="fill:var(--gold);color:var(--gold)"></i>
+          <i data-lucide="star" width="14" height="14" style="fill:var(--gold);color:var(--gold)"></i>
+          <i data-lucide="star" width="14" height="14" style="fill:var(--gold);color:var(--gold)"></i>
+        </div>
+        <p class="testi-text" data-lang-th="ลูกชายอายุ 8 ขวบชอบมากเลยค่ะ ขับครั้งแรกก็ไม่กลัวเลย เพราะเจ้าหน้าที่คอยดูแลตลอด กลับบ้านก็ยังขอมาอีก!" data-lang-en="My 8-year-old son absolutely loved it. First time on a kart and he wasn't scared at all — the staff were amazing. He's been asking to come back ever since!">ลูกชายอายุ 8 ขวบชอบมากเลยค่ะ ขับครั้งแรกก็ไม่กลัวเลย เพราะเจ้าหน้าที่คอยดูแลตลอด กลับบ้านก็ยังขอมาอีก!</p>
+        <div class="testi-author">
+          <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1778895113376-12b5e6a2562a?w=84&h=84&fit=crop" alt="Happy kid"></div>
+          <div>
+            <div class="testi-name" data-lang-th="คุณแม่นิภา ว." data-lang-en="Nipa W., Parent">คุณแม่นิภา ว.</div>
+            <div class="testi-role" data-lang-th="คุณแม่ลูก 2" data-lang-en="Mother of two">คุณแม่ลูก 2</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">
+          <i data-lucide="star" width="14" height="14" style="fill:var(--gold);color:var(--gold)"></i>
+          <i data-lucide="star" width="14" height="14" style="fill:var(--gold);color:var(--gold)"></i>
+          <i data-lucide="star" width="14" height="14" style="fill:var(--gold);color:var(--gold)"></i>
+          <i data-lucide="star" width="14" height="14" style="fill:var(--gold);color:var(--gold)"></i>
+          <i data-lucide="star" width="14" height="14" style="fill:var(--gold);color:var(--gold)"></i>
+        </div>
+        <p class="testi-text" data-lang-th="จัดปาร์ตี้วันเกิดลูกสาวที่นี่ ประทับใจมากครับ ทีมงานช่วยจัดทุกอย่าง เด็กๆ สนุกกันทุกคน คุ้มค่ามากๆ" data-lang-en="Held my daughter's birthday party here and was blown away. The team handled everything — every kid had a blast. Totally worth it.">จัดปาร์ตี้วันเกิดลูกสาวที่นี่ ประทับใจมากครับ ทีมงานช่วยจัดทุกอย่าง เด็กๆ สนุกกันทุกคน คุ้มค่ามากๆ</p>
+        <div class="testi-author">
+          <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1619252283943-b57f5e113d6a?w=84&h=84&fit=crop" alt="Boy on motorcycle"></div>
+          <div>
+            <div class="testi-name" data-lang-th="คุณพ่อสมชาย ร." data-lang-en="Somchai R., Dad">คุณพ่อสมชาย ร.</div>
+            <div class="testi-role" data-lang-th="คุณพ่อลูก 3" data-lang-en="Father of three">คุณพ่อลูก 3</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">
+          <i data-lucide="star" width="14" height="14" style="fill:var(--gold);color:var(--gold)"></i>
+          <i data-lucide="star" width="14" height="14" style="fill:var(--gold);color:var(--gold)"></i>
+          <i data-lucide="star" width="14" height="14" style="fill:var(--gold);color:var(--gold)"></i>
+          <i data-lucide="star" width="14" height="14" style="fill:var(--gold);color:var(--gold)"></i>
+          <i data-lucide="star" width="14" height="14" style="fill:var(--gold);color:var(--gold)"></i>
+        </div>
+        <p class="testi-text" data-lang-th="พาลูก 5 ขวบมาลองครั้งแรก กังวลมากก่อนมา แต่พอเห็นรอยยิ้มของเขาหลังขับเสร็จ คุ้มทุกบาทเลยค่ะ" data-lang-en="Brought my 5-year-old for the first time, so nervous beforehand. But seeing his smile after the ride — worth every baht.">พาลูก 5 ขวบมาลองครั้งแรก กังวลมากก่อนมา แต่พอเห็นรอยยิ้มของเขาหลังขับเสร็จ คุ้มทุกบาทเลยค่ะ</p>
+        <div class="testi-author">
+          <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1561629521-e10fe541d346?w=84&h=84&fit=crop" alt="Parent"></div>
+          <div>
+            <div class="testi-name" data-lang-th="คุณแม่ปราง จ." data-lang-en="Prang J., Parent">คุณแม่ปราง จ.</div>
+            <div class="testi-role" data-lang-th="คุณแม่มือใหม่" data-lang-en="First-time mom">คุณแม่มือใหม่</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">
+          <i data-lucide="star" width="14" height="14" style="fill:var(--gold);color:var(--gold)"></i>
+          <i data-lucide="star" width="14" height="14" style="fill:var(--gold);color:var(--gold)"></i>
+          <i data-lucide="star" width="14" height="14" style="fill:var(--gold);color:var(--gold)"></i>
+          <i data-lucide="star" width="14" height="14" style="fill:var(--gold);color:var(--gold)"></i>
+          <i data-lucide="star" width="14" height="14" style="fill:var(--gold);color:var(--gold)"></i>
+        </div>
+        <p class="testi-text" data-lang-th="เอาลูกๆ มาทุกเดือนเลยครับ เด็กๆ ชอบมาก โปรแกรมสปีดอคาเดมีทำให้ลูกพัฒนาได้เร็วมาก เห็นความก้าวหน้าชัดเจน" data-lang-en="We come every month now! The Speed Academy has made such a noticeable difference in my son's driving — real progress each time.">เอาลูกๆ มาทุกเดือนเลยครับ เด็กๆ ชอบมาก โปรแกรมสปีดอคาเดมีทำให้ลูกพัฒนาได้เร็วมาก เห็นความก้าวหน้าชัดเจน</p>
+        <div class="testi-author">
+          <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1691502290834-acc70e0574d6?w=84&h=84&fit=crop" alt="Family outdoors"></div>
+          <div>
+            <div class="testi-name" data-lang-th="คุณพ่อวรวุฒิ ป." data-lang-en="Worawut P., Dad">คุณพ่อวรวุฒิ ป.</div>
+            <div class="testi-role" data-lang-th="ลูกค้าประจำ" data-lang-en="Regular customer">ลูกค้าประจำ</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ck-sky"></div>
+
+<!-- ── CTA / CONTACT ── -->
+<section class="cta-section" id="contact">
+  <div class="cta-inner reveal">
+    <p class="section-label" style="color:rgba(255,255,255,0.7);" data-lang-th="พร้อมแล้วหรือยัง?" data-lang-en="Ready to Race?">พร้อมแล้วหรือยัง?</p>
+    <h2 class="cta-h2 d-font" data-lang-th="ออกสตาร์ทได้เลย!" data-lang-en="Start Your Engines!">ออกสตาร์ทได้เลย!</h2>
+    <p class="cta-sub" data-lang-th="จองสล็อตของหนูได้ตอนนี้เลย ก่อนที่จะเต็ม! เปิดทุกวัน เสาร์-อาทิตย์ และวันหยุดนักขัตฤกษ์" data-lang-en="Book your spot today before it fills up! Open every Saturday, Sunday, and public holiday.">จองสล็อตของหนูได้ตอนนี้เลย ก่อนที่จะเต็ม! เปิดทุกวัน เสาร์-อาทิตย์ และวันหยุดนักขัตฤกษ์</p>
+    <div class="cta-btns">
+      <a href="tel:+6602-000-0000" class="btn btn-white">
+        <i data-lucide="phone" width="18" height="18"></i>
+        <span data-lang-th="โทร 02-000-0000" data-lang-en="Call 02-000-0000">โทร 02-000-0000</span>
+      </a>
+      <a href="#" class="btn btn-outline-white">
+        <i data-lucide="calendar" width="18" height="18"></i>
+        <span data-lang-th="จองออนไลน์" data-lang-en="Book Online">จองออนไลน์</span>
+      </a>
+    </div>
+    <div style="margin-top:36px;display:flex;flex-wrap:wrap;justify-content:center;gap:28px;">
+      <div style="text-align:center;color:rgba(255,255,255,0.85);">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-weight:900;font-size:2rem;line-height:1;">09:00–18:00</div>
+        <div style="font-size:0.82rem;margin-top:4px;line-height:1.8;" data-lang-th="เสาร์ – อาทิตย์" data-lang-en="Sat – Sun">เสาร์ – อาทิตย์</div>
+      </div>
+      <div style="text-align:center;color:rgba(255,255,255,0.85);">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-weight:900;font-size:2rem;line-height:1;" data-lang-th="กรุงเทพฯ" data-lang-en="Bangkok">กรุงเทพฯ</div>
+        <div style="font-size:0.82rem;margin-top:4px;line-height:1.8;" data-lang-th="รามอินทรา ซอย 14" data-lang-en="Ramintra Soi 14">รามอินทรา ซอย 14</div>
+      </div>
+      <div style="text-align:center;color:rgba(255,255,255,0.85);">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-weight:900;font-size:2rem;line-height:1;">LINE</div>
+        <div style="font-size:0.82rem;margin-top:4px;line-height:1.8;">@kidskart</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">Kid's<span>Kart</span></div>
+      <p class="footer-tagline" data-lang-th="ขับสนุก ขับปลอดภัย ขับอย่างนักแข่ง" data-lang-en="Drive fun, drive safe, drive like a racer.">ขับสนุก ขับปลอดภัย ขับอย่างนักแข่ง</p>
+      <div style="display:flex;gap:12px;margin-top:20px;">
+        <a href="#" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.5);transition:background 0.2s,color 0.2s;" onmouseenter="this.style.background='var(--sky)';this.style.color='var(--dark)'" onmouseleave="this.style.background='rgba(255,255,255,0.08)';this.style.color='rgba(255,255,255,0.5)'"><i data-lucide="facebook" width="16" height="16"></i></a>
+        <a href="#" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.5);transition:background 0.2s,color 0.2s;" onmouseenter="this.style.background='var(--coral)';this.style.color='#fff'" onmouseleave="this.style.background='rgba(255,255,255,0.08)';this.style.color='rgba(255,255,255,0.5)'"><i data-lucide="instagram" width="16" height="16"></i></a>
+        <a href="#" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.5);transition:background 0.2s,color 0.2s;" onmouseenter="this.style.background='var(--sky)';this.style.color='var(--dark)'" onmouseleave="this.style.background='rgba(255,255,255,0.08)';this.style.color='rgba(255,255,255,0.5)'"><i data-lucide="message-circle" width="16" height="16"></i></a>
+      </div>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4 data-lang-th="เมนูหลัก" data-lang-en="Navigation">เมนูหลัก</h4>
+        <ul>
+          <li><a href="#about" data-lang-th="เกี่ยวกับเรา" data-lang-en="About Us">เกี่ยวกับเรา</a></li>
+          <li><a href="#programs" data-lang-th="โปรแกรม" data-lang-en="Programs">โปรแกรม</a></li>
+          <li><a href="#how" data-lang-th="วิธีสมัคร" data-lang-en="How It Works">วิธีสมัคร</a></li>
+          <li><a href="#safety" data-lang-th="ความปลอดภัย" data-lang-en="Safety">ความปลอดภัย</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-lang-th="โปรแกรม" data-lang-en="Programs">โปรแกรม</h4>
+        <ul>
+          <li><a href="#programs" data-lang-th="แทร็กเริ่มต้น" data-lang-en="Starter Track">แทร็กเริ่มต้น</a></li>
+          <li><a href="#programs" data-lang-th="จูเนียร์เรสเซอร์" data-lang-en="Junior Racer">จูเนียร์เรสเซอร์</a></li>
+          <li><a href="#programs" data-lang-th="สปีดอคาเดมี" data-lang-en="Speed Academy">สปีดอคาเดมี</a></li>
+          <li><a href="#programs" data-lang-th="แพ็คปาร์ตี้" data-lang-en="Party Pack">แพ็คปาร์ตี้</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-lang-th="ติดต่อเรา" data-lang-en="Contact">ติดต่อเรา</h4>
+        <div class="footer-contact">
+          <div class="footer-contact-item">
+            <i data-lucide="map-pin" width="15" height="15"></i>
+            <span data-lang-th="รามอินทรา ซอย 14 กรุงเทพฯ" data-lang-en="Ramintra Soi 14, Bangkok">รามอินทรา ซอย 14 กรุงเทพฯ</span>
+          </div>
+          <div class="footer-contact-item">
+            <i data-lucide="phone" width="15" height="15"></i>
+            <span>02-000-0000</span>
+          </div>
+          <div class="footer-contact-item">
+            <i data-lucide="mail" width="15" height="15"></i>
+            <span>hello@kidskart.th</span>
+          </div>
+          <div class="footer-contact-item">
+            <i data-lucide="clock" width="15" height="15"></i>
+            <span data-lang-th="เสาร์–อาทิตย์ 09:00–18:00" data-lang-en="Sat–Sun 09:00–18:00">เสาร์–อาทิตย์ 09:00–18:00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-inner" style="margin-top:24px;">
+    <div class="footer-bottom" style="width:100%">
+      <span data-lang-th="© 2026 Kid's Kart. สงวนลิขสิทธิ์" data-lang-en="© 2026 Kid's Kart. All rights reserved.">© 2026 Kid's Kart. สงวนลิขสิทธิ์</span>
+      <span data-lang-th="ขับขี่ปลอดภัย ขับขี่สนุก" data-lang-en="Drive safe. Drive fun.">ขับขี่ปลอดภัย ขับขี่สนุก</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Navbar scroll effect
+(function(){
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function(){
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, {passive: true});
+})();
+
+// Hamburger menu
+(function(){
+  var btn = document.getElementById('hamburger');
+  var menu = document.getElementById('mobileMenu');
+  btn.addEventListener('click', function(){
+    btn.classList.toggle('open');
+    menu.classList.toggle('open');
+  });
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      btn.classList.remove('open');
+      menu.classList.remove('open');
+    });
+  });
+})();
+
+// Intersection Observer reveals
+(function(){
+  var els = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, {threshold: 0.12});
+  els.forEach(function(el){ io.observe(el); });
+})();
+</script>
+
+<!-- Language switcher — exact provided script -->
+<script>
+(function(){var K='site-lang',L=localStorage.getItem(K)||'th';function S(l){L=l;localStorage.setItem(K,l);document.documentElement.lang=l;document.querySelectorAll('[data-lang-th]').forEach(function(e){var t=e.getAttribute('data-lang-'+l);if(t!==null){e.textContent=t}});var lb=document.querySelector('.lang-sw__label');if(lb){lb.textContent=l.toUpperCase()}}var sw=document.querySelector('.lang-sw');if(sw){sw.addEventListener('click',function(){S(L==='th'?'en':'th')});sw.style.cursor='pointer'}if(L!=='th'){S(L)}})();
+</script>
+
+<script>
+lucide.createIcons();
+</script>
+</body>
+</html>
